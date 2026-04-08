@@ -22,7 +22,7 @@ func genSig(nonce, privatekey, password string) {
 	if privatekey == "agent" || strings.HasPrefix(privatekey, "agent:") || privatekey == "" {
 		sshAgent, err := dialAgent()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("could not connect to ssh-agent: %v", err)
 		}
 		defer sshAgent.Close()
 		ag := agent.NewClient(sshAgent)
@@ -110,6 +110,18 @@ func printHelp() {
 }
 
 func main() {
+	if len(os.Args) < 2 {
+		printHelp()
+		return
+	}
+
+	for _, arg := range os.Args[1:] {
+		if arg == "-h" || arg == "--help" || arg == "help" {
+			printHelp()
+			return
+		}
+	}
+
 	switch len(os.Args) {
 	case 2:
 		genSig(os.Args[1], "", "")

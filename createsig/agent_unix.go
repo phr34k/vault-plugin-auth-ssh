@@ -3,7 +3,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net"
 	"os"
 )
@@ -11,7 +11,7 @@ import (
 func dialAgent() (net.Conn, error) {
 	sock := os.Getenv("SSH_AUTH_SOCK")
 	if sock == "" {
-		log.Fatal("SSH_AUTH_SOCK is not set")
+		return nil, fmt.Errorf("SSH_AUTH_SOCK is not set")
 	}
 	return net.Dial("unix", sock)
 }

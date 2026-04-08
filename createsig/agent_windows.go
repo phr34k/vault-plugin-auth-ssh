@@ -3,7 +3,6 @@
 package main
 
 import (
-	"log"
 	"net"
 	"os"
 
@@ -13,7 +12,7 @@ import (
 func dialAgent() (net.Conn, error) {
 	sock := os.Getenv("SSH_AUTH_SOCK")
 	if sock == "" {
-		log.Fatal("SSH_AUTH_SOCK is not set")
+		sock = `\\.\pipe\openssh-ssh-agent`
 	}
 	return winio.DialPipe(sock, nil)
 }

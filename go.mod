@@ -1,8 +1,9 @@
-module github.com/phr34k/vault-plugin-auth-ssh
+module github.com/42wim/vault-plugin-auth-ssh
 
 go 1.23.3
 
 require (
+	github.com/Microsoft/go-winio v0.6.2
 	github.com/hashicorp/errwrap v1.1.0
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/hashicorp/go-sockaddr v1.0.7
@@ -13,7 +14,6 @@ require (
 )
 
 require (
-	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
