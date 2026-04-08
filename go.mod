@@ -1,4 +1,4 @@
-module github.com/42wim/vault-plugin-auth-ssh
+module github.com/phr34k/vault-plugin-auth-ssh
 
 go 1.23.3
 
