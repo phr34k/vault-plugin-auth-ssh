@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"log"
-	"net"
 	"os"
 	"strings"
 	"time"
@@ -21,7 +20,7 @@ func genSig(nonce, privatekey, password string) {
 	)
 
 	if privatekey == "agent" || strings.HasPrefix(privatekey, "agent:") || privatekey == "" {
-		sshAgent, err := net.Dial("unix", os.Getenv("SSH_AUTH_SOCK"))
+		sshAgent, err := dialAgent()
 		if err != nil {
 			log.Fatal(err)
 		}
