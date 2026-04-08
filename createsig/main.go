@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"encoding/base64"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -110,25 +111,23 @@ func printHelp() {
 }
 
 func main() {
-	if len(os.Args) < 2 {
+	flag.Usage = printHelp
+	flag.Parse()
+
+	args := flag.Args()
+
+	if len(args) == 0 {
 		printHelp()
 		return
 	}
 
-	for _, arg := range os.Args[1:] {
-		if arg == "-h" || arg == "--help" || arg == "help" {
-			printHelp()
-			return
-		}
-	}
-
-	switch len(os.Args) {
+	switch len(args) {
+	case 1:
+		genSig(args[0], "", "")
 	case 2:
-		genSig(os.Args[1], "", "")
+		genSig(args[0], args[1], "")
 	case 3:
-		genSig(os.Args[1], os.Args[2], "")
-	case 4:
-		genSig(os.Args[1], os.Args[2], os.Args[3])
+		genSig(args[0], args[1], args[2])
 	default:
 		printHelp()
 	}
